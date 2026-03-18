@@ -27,7 +27,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   1. Opening index.html in a browser shows a correctly sized canvas with no console errors
   2. The game loop runs at 60 FPS with a fixed-timestep accumulator — frame timing is stable across tab switches
   3. Arrow keys and spacebar register as input state flags readable each frame (verified by logging key state to console)
-**Plans**: TBD
+**Plans**: 1 plan
+
+Plans:
+- [ ] 01-01-PLAN.md — HTML5 canvas + fixed-timestep rAF loop + keyboard state-map input
 
 ### Phase 2: Playable Core
 **Goal**: Users can play a complete round — move and shoot, watch aliens march and return fire, lose lives, and see the score
@@ -35,7 +38,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Requirements**: PLAY-01, PLAY-02, PLAY-03, PLAY-04, ALIN-01, ALIN-02, ALIN-03, ALIN-04, ALIN-05, CMBT-01, CMBT-02, CMBT-03, CMBT-04
 **Success Criteria** (what must be TRUE):
   1. Player cannon moves left and right within screen bounds and fires one bullet at a time with spacebar
-  2. 55 aliens in a 5×11 grid march left/right as a unit, step down at each wall, and visibly accelerate as aliens are destroyed
+  2. 55 aliens in a 5x11 grid march left/right as a unit, step down at each wall, and visibly accelerate as aliens are destroyed
   3. Bottom-row aliens fire downward bullets; player loses a life on hit and respawns; game ends when all 3 lives are lost
   4. Player bullets destroy aliens on contact; score increases with correct per-row point values; HUD shows live score and lives
   5. Game ends immediately if any alien reaches the bottom of the screen
@@ -66,11 +69,11 @@ Decimal phases appear between their surrounding integers in numeric order.
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4
+Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/TBD | Not started | - |
+| 1. Foundation | 0/1 | Not started | - |
 | 2. Playable Core | 0/TBD | Not started | - |
 | 3. Destructible Shields | 0/TBD | Not started | - |
 | 4. Complete Game | 0/TBD | Not started | - |
