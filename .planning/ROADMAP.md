@@ -12,7 +12,7 @@ Four phases deliver the complete Space Invaders experience. Phase 1 builds the i
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Foundation** - Game loop, canvas setup, and input handling
+- [x] **Phase 1: Foundation** - Game loop, canvas setup, and input handling
 - [ ] **Phase 2: Playable Core** - Player, alien formation, and combat in a complete loop
 - [ ] **Phase 3: Destructible Shields** - Pixel-level shield erosion and collision
 - [ ] **Phase 4: Complete Game** - UFO, wave progression, and game-over/restart flow
@@ -30,7 +30,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 1 plan
 
 Plans:
-- [ ] 01-01-PLAN.md — HTML5 canvas + fixed-timestep rAF loop + keyboard state-map input
+- [x] 01-01-PLAN.md — HTML5 canvas + fixed-timestep rAF loop + keyboard state-map input
 
 ### Phase 2: Playable Core
 **Goal**: Users can play a complete round — move and shoot, watch aliens march and return fire, lose lives, and see the score
@@ -73,7 +73,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/1 | Not started | - |
+| 1. Foundation | 1/1 | Complete | 2026-03-18 |
 | 2. Playable Core | 0/TBD | Not started | - |
 | 3. Destructible Shields | 0/TBD | Not started | - |
 | 4. Complete Game | 0/TBD | Not started | - |

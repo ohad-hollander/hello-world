@@ -7,9 +7,9 @@
 
 ### Foundation
 
-- [ ] **FOUND-01**: Game runs in browser via HTML5 Canvas with a `requestAnimationFrame` + delta-time fixed-timestep loop
-- [ ] **FOUND-02**: Canvas is sized and scaled correctly (based on original 224×256, scaled 3×)
-- [ ] **FOUND-03**: Keyboard input uses a state-map pattern (flags set in event handlers, read each frame in game loop)
+- [x] **FOUND-01**: Game runs in browser via HTML5 Canvas with a `requestAnimationFrame` + delta-time fixed-timestep loop
+- [x] **FOUND-02**: Canvas is sized and scaled correctly (based on original 224×256, scaled 3×)
+- [x] **FOUND-03**: Keyboard input uses a state-map pattern (flags set in event handlers, read each frame in game loop)
 
 ### Player
 
@@ -76,9 +76,9 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FOUND-01 | Phase 1 | Pending |
-| FOUND-02 | Phase 1 | Pending |
-| FOUND-03 | Phase 1 | Pending |
+| FOUND-01 | Phase 1 | Complete |
+| FOUND-02 | Phase 1 | Complete |
+| FOUND-03 | Phase 1 | Complete |
 | PLAY-01 | Phase 2 | Pending |
 | PLAY-02 | Phase 2 | Pending |
 | PLAY-03 | Phase 2 | Pending |
