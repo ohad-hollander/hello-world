@@ -83,23 +83,23 @@
 | PLAY-02 | Phase 2 | Pending |
 | PLAY-03 | Phase 2 | Pending |
 | PLAY-04 | Phase 2 | Pending |
-| ALIN-01 | Phase 3 | Pending |
-| ALIN-02 | Phase 3 | Pending |
-| ALIN-03 | Phase 3 | Pending |
-| ALIN-04 | Phase 4 | Pending |
-| ALIN-05 | Phase 4 | Pending |
-| CMBT-01 | Phase 4 | Pending |
-| CMBT-02 | Phase 4 | Pending |
-| CMBT-03 | Phase 4 | Pending |
-| CMBT-04 | Phase 4 | Pending |
-| SHLD-01 | Phase 5 | Pending |
-| SHLD-02 | Phase 5 | Pending |
-| SHLD-03 | Phase 5 | Pending |
-| UFO-01 | Phase 6 | Pending |
-| UFO-02 | Phase 6 | Pending |
-| FLOW-01 | Phase 6 | Pending |
-| FLOW-02 | Phase 6 | Pending |
-| FLOW-03 | Phase 6 | Pending |
+| ALIN-01 | Phase 2 | Pending |
+| ALIN-02 | Phase 2 | Pending |
+| ALIN-03 | Phase 2 | Pending |
+| ALIN-04 | Phase 2 | Pending |
+| ALIN-05 | Phase 2 | Pending |
+| CMBT-01 | Phase 2 | Pending |
+| CMBT-02 | Phase 2 | Pending |
+| CMBT-03 | Phase 2 | Pending |
+| CMBT-04 | Phase 2 | Pending |
+| SHLD-01 | Phase 3 | Pending |
+| SHLD-02 | Phase 3 | Pending |
+| SHLD-03 | Phase 3 | Pending |
+| UFO-01 | Phase 4 | Pending |
+| UFO-02 | Phase 4 | Pending |
+| FLOW-01 | Phase 4 | Pending |
+| FLOW-02 | Phase 4 | Pending |
+| FLOW-03 | Phase 4 | Pending |
 
 **Coverage:**
 - v1 requirements: 24 total
@@ -108,4 +108,4 @@
 
 ---
 *Requirements defined: 2026-03-18*
-*Last updated: 2026-03-18 after initial definition*
+*Last updated: 2026-03-18 after roadmap creation (compressed to 4 coarse phases)*
