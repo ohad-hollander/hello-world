@@ -21,11 +21,53 @@ function initGame() {
   initUFO();                // UFO-01: reset UFO spawn timer
 }
 
+function updateWaveClear(dt) {
+  // FLOW-01: count down, then start next wave
+  waveClearTimer += dt;
+  if (waveClearTimer >= WAVE_CLEAR_DELAY) {
+    startNextWave();
+  }
+}
+
+function startNextWave() {
+  waveNumber++;
+  waveClearTimer = 0;
+
+  // Reset aliens to full 55-alien formation
+  initAliens();
+
+  // Apply wave speed bonus: each wave, march step interval is WAVE_SPEED_FACTOR faster
+  // initAliens() resets march.stepInterval to base (1.0s for 55 aliens)
+  // Override it with the wave multiplier (clamp to minimum 0.05s)
+  march.stepInterval = Math.max(0.05, calcStepInterval(55) * Math.pow(WAVE_SPEED_FACTOR, waveNumber - 1));
+
+  // Reset UFO timer for the new wave
+  initUFO();
+
+  // Clear alien bullets — no stale projectiles carried over
+  alienBullets.length = 0;
+
+  // NOTE: Shields are intentionally NOT reset — authentic behavior: shield damage persists across waves
+  // NOTE: Player position and lives are intentionally NOT reset between waves
+
+  gameState = 'playing';
+}
+
+function updateGameOver(dt) {
+  // FLOW-02/03: listen for restart key — Enter or R
+  if (keys['Enter'] || keys['KeyR']) {
+    initGame(); // full clean restart — all timers and state reset
+  }
+}
+
 function update(dt) {
   if (gameState === 'playing') {
     updatePlaying(dt);
+  } else if (gameState === 'wave_clear') {
+    updateWaveClear(dt);   // FLOW-01: wave transition countdown
+  } else if (gameState === 'game_over') {
+    updateGameOver(dt);    // FLOW-02/03: restart key listener
   }
-  // game_over / wave_clear: freeze state (restart flow is Phase 4)
 }
 
 function updatePlaying(dt) {
