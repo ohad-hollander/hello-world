@@ -1,7 +1,7 @@
 // js/game.js
 // Game state machine and main update/render orchestration
 
-let gameState = 'playing'; // 'playing' | 'game_over'
+let gameState = 'playing'; // 'playing' | 'game_over' | 'wave_clear'
 let score = 0;
 let lives = 3;
 
@@ -11,18 +11,21 @@ function initGame() {
   lives = 3;
   resetPlayer();
   initAliens();
+  alienBullets.length = 0; // clear any leftover bullets
 }
 
 function update(dt) {
   if (gameState === 'playing') {
     updatePlaying(dt);
   }
-  // game_over: freeze state (restart flow is Phase 4)
+  // game_over / wave_clear: freeze state (restart flow is Phase 4)
 }
 
 function updatePlaying(dt) {
   updatePlayer(dt);
   updateAliens(dt);
+  updateBullets(dt);
+  checkCollisions();
 
   // Check: alien reached ground line (ALIN-05) — immediate game over
   for (const alien of aliens) {
@@ -31,7 +34,12 @@ function updatePlaying(dt) {
       return;
     }
   }
-  // Plan 03 will add: updateBullets(dt), checkCollisions(), checkLivesAndScore()
+
+  // Check: all aliens destroyed — Phase 4 adds wave restart
+  if (getAliveCount() === 0) {
+    // Wave clear — Phase 4 handles full wave progression
+    gameState = 'wave_clear';
+  }
 }
 
 function render() {
@@ -42,7 +50,11 @@ function render() {
   if (gameState === 'playing') {
     renderPlaying();
   } else if (gameState === 'game_over') {
+    renderPlaying(); // render final frame behind text
     renderGameOver();
+  } else if (gameState === 'wave_clear') {
+    renderPlaying();
+    renderWaveClear();
   }
 }
 
@@ -70,10 +82,29 @@ function renderPlaying() {
 
 function renderGameOver() {
   ctx.fillStyle = '#fff';
-  ctx.font = '48px monospace';
+  ctx.font = 'bold 48px monospace';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText('GAME OVER', LOGICAL_WIDTH / 2, LOGICAL_HEIGHT / 2);
+  ctx.fillText('GAME OVER', LOGICAL_WIDTH / 2, LOGICAL_HEIGHT / 2 - 30);
+
   ctx.font = '24px monospace';
-  ctx.fillText('Score: ' + score, LOGICAL_WIDTH / 2, LOGICAL_HEIGHT / 2 + 60);
+  ctx.fillText('Final Score: ' + String(score).padStart(4, '0'), LOGICAL_WIDTH / 2, LOGICAL_HEIGHT / 2 + 30);
+  ctx.font = '18px monospace';
+  ctx.fillStyle = '#aaa';
+  ctx.fillText('(full restart in Phase 4)', LOGICAL_WIDTH / 2, LOGICAL_HEIGHT / 2 + 70);
+}
+
+function renderWaveClear() {
+  ctx.fillStyle = '#0f0';
+  ctx.font = 'bold 48px monospace';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('WAVE CLEAR!', LOGICAL_WIDTH / 2, LOGICAL_HEIGHT / 2 - 30);
+
+  ctx.font = '24px monospace';
+  ctx.fillStyle = '#fff';
+  ctx.fillText('Score: ' + String(score).padStart(4, '0'), LOGICAL_WIDTH / 2, LOGICAL_HEIGHT / 2 + 30);
+  ctx.font = '18px monospace';
+  ctx.fillStyle = '#aaa';
+  ctx.fillText('(wave progression in Phase 4)', LOGICAL_WIDTH / 2, LOGICAL_HEIGHT / 2 + 70);
 }
