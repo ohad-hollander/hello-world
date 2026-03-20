@@ -61,7 +61,7 @@ function render() {
 function renderPlaying() {
   renderAliens(ctx);
   renderPlayer(ctx);
-  // Plan 04 will add: renderHUD(ctx)
+  renderHUD(ctx);  // renders on top of game elements
 
   // Render alien bullets
   if (typeof alienBullets !== 'undefined') {
@@ -81,6 +81,12 @@ function renderPlaying() {
 }
 
 function renderGameOver() {
+  renderHUD(ctx);  // show final score in HUD
+
+  // Dim overlay
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+  ctx.fillRect(0, 0, LOGICAL_WIDTH, LOGICAL_HEIGHT);
+
   ctx.fillStyle = '#fff';
   ctx.font = 'bold 48px monospace';
   ctx.textAlign = 'center';
@@ -95,6 +101,11 @@ function renderGameOver() {
 }
 
 function renderWaveClear() {
+  renderHUD(ctx);  // show score on wave clear
+
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+  ctx.fillRect(0, 0, LOGICAL_WIDTH, LOGICAL_HEIGHT);
+
   ctx.fillStyle = '#0f0';
   ctx.font = 'bold 48px monospace';
   ctx.textAlign = 'center';
