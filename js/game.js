@@ -10,7 +10,7 @@ function initGame() {
   score = 0;
   lives = 3;
   resetPlayer();
-  // Phase 2 plans 02 and 03 will add: initAliens(), clearBullets()
+  initAliens();
 }
 
 function update(dt) {
@@ -22,8 +22,16 @@ function update(dt) {
 
 function updatePlaying(dt) {
   updatePlayer(dt);
-  // Phase 2 plan 02 will add: updateAliens(dt)
-  // Phase 2 plan 03 will add: updateBullets(dt), checkCollisions(), checkWinLose()
+  updateAliens(dt);
+
+  // Check: alien reached ground line (ALIN-05) — immediate game over
+  for (const alien of aliens) {
+    if (alien.alive && alien.y + alien.h >= GROUND_LINE) {
+      gameState = 'game_over';
+      return;
+    }
+  }
+  // Plan 03 will add: updateBullets(dt), checkCollisions(), checkLivesAndScore()
 }
 
 function render() {
@@ -39,9 +47,17 @@ function render() {
 }
 
 function renderPlaying() {
+  renderAliens(ctx);
   renderPlayer(ctx);
-  // Phase 2 plan 02 will add: renderAliens(ctx)
-  // Phase 2 plan 04 will add: renderHUD(ctx)
+  // Plan 04 will add: renderHUD(ctx)
+
+  // Render alien bullets
+  if (typeof alienBullets !== 'undefined') {
+    ctx.fillStyle = '#f00';
+    for (const b of alienBullets) {
+      ctx.fillRect(b.x, b.y, b.w, b.h);
+    }
+  }
 
   // Ground line
   ctx.strokeStyle = '#0f0';
