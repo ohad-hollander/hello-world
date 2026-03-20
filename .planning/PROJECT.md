@@ -28,11 +28,15 @@ Validated in Phase 3: Destructible Shields
 - [x] Player and alien bullets erode circular craters into shields
 - [x] Alien overflight strips shield pixels on each march step
 
+Validated in Phase 4: Complete Game
+- [x] Mystery UFO periodically flies across top for bonus points (50/100/150/300)
+- [x] Wave progression — all aliens destroyed starts new wave with 5% speed increase
+- [x] Game-over screen shows final score, wave reached, and restart prompt
+- [x] Clean restart via ENTER or R — no timer leaks, all state reset
+
 ### Active
 
-- [ ] Mystery UFO flies across the top for bonus points
-- [ ] Game over and restart flow
-- [ ] Wave progression (new wave when all aliens destroyed)
+None — all v1 requirements validated.
 
 ### Out of Scope
 
@@ -62,9 +66,10 @@ Validated in Phase 3: Destructible Shields
 
 ## Current State
 
-Phase 3 complete — four destructible shields added. Pixel-level offscreen canvas erosion via
-destination-out craters. Alien overflight strips shield pixels each march step. 8 JS modules:
-constants, input, player, aliens, bullets, shields, hud, game.
+Phase 4 complete — full Space Invaders game implemented. UFO mystery ship with randomized bonus
+points, wave progression with 5% compounding speed increase, GAME OVER screen with restart, and
+wave number in HUD. 9 JS modules: constants, input, player, aliens, bullets, shields, ufo, hud, game.
+All v1 requirements validated. Game is fully playable end-to-end.
 
 ---
-*Last updated: 2026-03-20 after Phase 3: Destructible Shields*
+*Last updated: 2026-03-20 after Phase 4: Complete Game*
