@@ -14,12 +14,12 @@ function renderHUD(ctx) {
   ctx.font = 'bold 24px monospace';
   ctx.fillText(String(score).padStart(4, '0'), 24, 34);
 
-  // Hi-Score label centered (classic Space Invaders layout)
+  // Wave number centered (FLOW-01: wave display)
   ctx.font = 'bold 18px monospace';
   ctx.textAlign = 'center';
-  ctx.fillText('HI-SCORE', LOGICAL_WIDTH / 2, 12);
+  ctx.fillText('WAVE', LOGICAL_WIDTH / 2, 12);
   ctx.font = 'bold 24px monospace';
-  ctx.fillText('0000', LOGICAL_WIDTH / 2, 34); // static for Phase 2; Phase 4 adds persistence
+  ctx.fillText(String(waveNumber), LOGICAL_WIDTH / 2, 34);
 
   // Lives label and value (top-right)
   ctx.font = 'bold 18px monospace';
