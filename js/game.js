@@ -12,7 +12,9 @@ function initGame() {
   resetPlayer();
   initAliens();
   alienBullets.length = 0; // clear any leftover bullets
+  playerBullet = null;      // ensure no stale bullet on restart
   initShields();            // SHLD-01: initialize 4 destructible shields
+  initUFO();                // UFO-01: reset UFO spawn timer
 }
 
 function update(dt) {
@@ -26,6 +28,7 @@ function updatePlaying(dt) {
   updatePlayer(dt);
   updateAliens(dt);
   updateBullets(dt);
+  updateUFO(dt);       // UFO-01: advance UFO spawn timer or movement
   checkCollisions();
 
   // Check: alien reached ground line (ALIN-05) — immediate game over
@@ -62,6 +65,7 @@ function render() {
 function renderPlaying() {
   renderShields(ctx);  // SHLD-01: shields render behind aliens
   renderAliens(ctx);
+  renderUFO(ctx);      // UFO-01: render above aliens (top of screen)
   renderPlayer(ctx);
   renderHUD(ctx);  // renders on top of game elements
 
