@@ -23,9 +23,13 @@ Validated in Phase 2: Playable Core
 - [x] Score tracking displayed on screen (zero-padded HUD)
 - [x] Game ends if alien reaches ground line
 
+Validated in Phase 3: Destructible Shields
+- [x] Four destructible shields protect the player (offscreen canvas, pixel-level erosion)
+- [x] Player and alien bullets erode circular craters into shields
+- [x] Alien overflight strips shield pixels on each march step
+
 ### Active
 
-- [ ] Destructible shields protect the player
 - [ ] Mystery UFO flies across the top for bonus points
 - [ ] Game over and restart flow
 - [ ] Wave progression (new wave when all aliens destroyed)
@@ -58,9 +62,9 @@ Validated in Phase 2: Playable Core
 
 ## Current State
 
-Phase 2 complete — the game is fully playable. Player moves, fires, aliens march and fire back,
-collision detection works, lives system triggers game-over, HUD shows live score.
-7 JS modules: constants, input, player, aliens, bullets, hud, game.
+Phase 3 complete — four destructible shields added. Pixel-level offscreen canvas erosion via
+destination-out craters. Alien overflight strips shield pixels each march step. 8 JS modules:
+constants, input, player, aliens, bullets, shields, hud, game.
 
 ---
-*Last updated: 2026-03-20 after Phase 2: Playable Core*
+*Last updated: 2026-03-20 after Phase 3: Destructible Shields*
