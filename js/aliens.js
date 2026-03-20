@@ -176,28 +176,117 @@ function getAliveCount() {
 }
 
 function renderAliens(ctx) {
+  const S = 3; // each logical pixel = 3×3 canvas pixels (12×8 grid → 36×24)
+
+  // Squid (row 0) — spiked skull bug with antenna, cyan
+  const squidA = [
+    [0,0,1,0,0,0,0,0,0,1,0,0],
+    [0,0,1,1,0,0,0,0,1,1,0,0],
+    [0,1,1,1,1,1,1,1,1,1,1,0],
+    [1,1,0,0,1,1,1,1,0,0,1,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1],
+    [0,1,1,0,1,1,1,1,0,1,1,0],
+    [0,1,0,0,0,1,1,0,0,0,1,0],
+    [1,0,0,0,0,0,0,0,0,0,0,1],
+  ];
+  const squidB = [
+    [0,0,1,0,0,0,0,0,0,1,0,0],
+    [0,0,1,1,0,0,0,0,1,1,0,0],
+    [0,1,1,1,1,1,1,1,1,1,1,0],
+    [1,1,0,0,1,1,1,1,0,0,1,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1],
+    [0,1,1,0,1,1,1,1,0,1,1,0],
+    [1,0,0,0,0,1,1,0,0,0,0,1],
+    [0,0,1,0,0,0,0,0,0,1,0,0],
+  ];
+  // Eye positions for squid: row 3, cols 4–5 and 6–7 (inside the filled zones)
+  const squidEyes = [[3,4],[3,7]];
+
+  // Crab (rows 1–2) — armored crab with big claws, yellow
+  const crabA = [
+    [1,0,0,0,0,0,0,0,0,0,0,1],
+    [0,1,0,0,1,0,0,1,0,0,1,0],
+    [0,0,1,1,1,1,1,1,1,1,0,0],
+    [0,1,1,0,1,1,1,1,0,1,1,0],
+    [1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1],
+    [0,0,1,0,0,0,0,0,0,1,0,0],
+    [0,1,0,0,0,0,0,0,0,0,1,0],
+  ];
+  const crabB = [
+    [0,1,0,0,0,0,0,0,0,0,1,0],
+    [1,0,0,1,0,0,0,0,1,0,0,1],
+    [0,0,1,1,1,1,1,1,1,1,0,0],
+    [0,1,1,0,1,1,1,1,0,1,1,0],
+    [1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1],
+    [0,1,0,0,0,0,0,0,0,0,1,0],
+    [1,0,0,0,0,0,0,0,0,0,0,1],
+  ];
+  // Eye positions for crab: row 3, cols 4 and 7
+  const crabEyes = [[3,4],[3,7]];
+
+  // Octopus (rows 3–4) — fat dome blob with tentacles, hot orange-pink
+  const octopusA = [
+    [0,0,0,1,1,1,1,1,1,0,0,0],
+    [0,0,1,1,1,1,1,1,1,1,0,0],
+    [0,1,1,0,0,1,1,0,0,1,1,0],
+    [1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1],
+    [0,1,1,0,1,1,1,1,0,1,1,0],
+    [0,1,0,1,0,0,0,0,1,0,1,0],
+    [1,0,1,0,0,0,0,0,0,1,0,1],
+  ];
+  const octopusB = [
+    [0,0,0,1,1,1,1,1,1,0,0,0],
+    [0,0,1,1,1,1,1,1,1,1,0,0],
+    [0,1,1,0,0,1,1,0,0,1,1,0],
+    [1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1],
+    [0,1,1,0,1,1,1,1,0,1,1,0],
+    [1,0,0,1,0,0,0,0,1,0,0,1],
+    [0,1,0,0,0,0,0,0,0,0,1,0],
+  ];
+  // Eye positions for octopus: row 2, cols 3 and 8
+  const octopusEyes = [[2,3],[2,8]];
+
   for (const alien of aliens) {
     if (!alien.alive) continue;
 
-    // Color by row type (authentic color scheme)
-    // Row 0: squid (top) — cyan
-    // Rows 1-2: crab — white
-    // Rows 3-4: octopus (bottom) — magenta
+    let sprite, color, eyes;
     if (alien.row === 0) {
-      ctx.fillStyle = '#0ff';
+      sprite = alien.animFrame === 0 ? squidA : squidB;
+      color = '#00ffff';
+      eyes = squidEyes;
     } else if (alien.row <= 2) {
-      ctx.fillStyle = '#fff';
+      sprite = alien.animFrame === 0 ? crabA : crabB;
+      color = '#ffee00';
+      eyes = crabEyes;
     } else {
-      ctx.fillStyle = '#f0f';
+      sprite = alien.animFrame === 0 ? octopusA : octopusB;
+      color = '#ff4499';
+      eyes = octopusEyes;
     }
 
-    // Simple rect — animFrame offsets width slightly for walk feel
-    const wOffset = alien.animFrame === 1 ? 4 : 0;
-    ctx.fillRect(
-      alien.x + wOffset / 2,
-      alien.y,
-      alien.w - wOffset,
-      alien.h
-    );
+    // Neon glow — pulses slightly between animation frames
+    ctx.shadowColor = color;
+    ctx.shadowBlur = alien.animFrame === 0 ? 8 : 14;
+
+    ctx.fillStyle = color;
+    for (let r = 0; r < sprite.length; r++) {
+      for (let c = 0; c < sprite[r].length; c++) {
+        if (sprite[r][c]) ctx.fillRect(alien.x + c * S, alien.y + r * S, S, S);
+      }
+    }
+
+    // Glowing white eyes
+    ctx.shadowColor = '#fff';
+    ctx.shadowBlur = 6;
+    ctx.fillStyle = '#fff';
+    for (const [er, ec] of eyes) {
+      ctx.fillRect(alien.x + ec * S, alien.y + er * S, S, S);
+    }
+
+    ctx.shadowBlur = 0; // reset
   }
 }
