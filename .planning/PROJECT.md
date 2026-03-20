@@ -12,18 +12,23 @@ A fully playable, faithful recreation of the original Space Invaders experience 
 
 ### Validated
 
-(None yet — ship to validate)
+Validated in Phase 1: Foundation
+- [x] Game loop (rAF + fixed-timestep), canvas setup, keyboard input
+
+Validated in Phase 2: Playable Core
+- [x] Player cannon moves left/right and shoots (one bullet, rising-edge spacebar)
+- [x] Grid of aliens (55, 5×11) moves and descends, increasing speed as they're eliminated
+- [x] Aliens fire back at the player (bottom-row per column, max 3 bullets)
+- [x] Lives system (3 lives, game over on depletion)
+- [x] Score tracking displayed on screen (zero-padded HUD)
+- [x] Game ends if alien reaches ground line
 
 ### Active
 
-- [ ] Player cannon moves left/right and shoots
-- [ ] Grid of aliens moves and descends, increasing speed as they're eliminated
-- [ ] Aliens fire back at the player
 - [ ] Destructible shields protect the player
 - [ ] Mystery UFO flies across the top for bonus points
-- [ ] Lives system (3 lives, game over on depletion)
-- [ ] Score tracking displayed on screen
 - [ ] Game over and restart flow
+- [ ] Wave progression (new wave when all aliens destroyed)
 
 ### Out of Scope
 
@@ -51,5 +56,11 @@ A fully playable, faithful recreation of the original Space Invaders experience 
 | HTML5 Canvas over DOM/SVG | Game loop performance, pixel-level control | — Pending |
 | Vanilla JS over framework | No build tooling needed, learning-focused | — Pending |
 
+## Current State
+
+Phase 2 complete — the game is fully playable. Player moves, fires, aliens march and fire back,
+collision detection works, lives system triggers game-over, HUD shows live score.
+7 JS modules: constants, input, player, aliens, bullets, hud, game.
+
 ---
-*Last updated: 2026-03-18 after initialization*
+*Last updated: 2026-03-20 after Phase 2: Playable Core*
