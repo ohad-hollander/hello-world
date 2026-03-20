@@ -40,6 +40,7 @@ function checkPlayerBulletVsAliens() {
       // Hit! Kill alien and award score
       killAlien(alien);
       score += ROW_POINTS[alien.row];
+      sfxAlienHit();
       playerBullet = null; // bullet consumed
       return; // stop checking — bullet is gone
     }
@@ -55,9 +56,11 @@ function checkAlienBulletsVsPlayer() {
       alienBullets.splice(i, 1); // remove bullet
 
       lives--;
+      sfxPlayerDeath();
       if (lives <= 0) {
         // All lives gone — game over (PLAY-04)
         gameState = 'game_over';
+        sfxLose();
       } else {
         // Respawn with invincibility (PLAY-03)
         resetPlayer();

@@ -57,6 +57,7 @@ function updatePlayer(dt) {
       h: PLAYER_BULLET_H,
       vy: -PLAYER_BULLET_SPEED
     };
+    sfxShoot();
   }
   prevSpaceDown = spaceDown;
 
@@ -73,13 +74,28 @@ function renderPlayer(ctx) {
   // Skip render if invincible and flashing (flicker effect)
   if (player.invincible && player.invincibleFlash) return;
 
-  // Player cannon — green rectangle (placeholder shape, sprites in Phase 4)
+  // Player cannon — pixel-art sprite (16×8 @ scale 3 = 48×24)
+  const S = 3;
+  const px = [
+    [0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0],
+    [0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0],
+    [0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0],
+    [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+  ];
   ctx.fillStyle = '#0f0';
-  ctx.fillRect(player.x, player.y, player.w, player.h);
+  for (let r = 0; r < px.length; r++) {
+    for (let c = 0; c < px[r].length; c++) {
+      if (px[r][c]) ctx.fillRect(player.x + c * S, player.y + r * S, S, S);
+    }
+  }
 
-  // Player bullet — white thin rectangle
+  // Player bullet — bright yellow
   if (playerBullet) {
-    ctx.fillStyle = '#fff';
+    ctx.fillStyle = '#ff0';
     ctx.fillRect(playerBullet.x, playerBullet.y, playerBullet.w, playerBullet.h);
   }
 }

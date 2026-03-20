@@ -81,6 +81,7 @@ function updatePlaying(dt) {
   for (const alien of aliens) {
     if (alien.alive && alien.y + alien.h >= GROUND_LINE) {
       gameState = 'game_over';
+      sfxLose();
       return;
     }
   }
@@ -89,6 +90,7 @@ function updatePlaying(dt) {
   if (getAliveCount() === 0) {
     // Wave clear — Phase 4 handles full wave progression
     gameState = 'wave_clear';
+    sfxWin();
   }
 }
 

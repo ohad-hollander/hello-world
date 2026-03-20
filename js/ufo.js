@@ -61,8 +61,22 @@ function updateUFO(dt) {
 
 function renderUFO(ctx) {
   if (!ufo.active) return;
-  ctx.fillStyle = '#f00'; // classic red mystery ship
-  ctx.fillRect(ufo.x, ufo.y, ufo.w, ufo.h);
+  // Mystery ship — pixel-art sprite (16×6 @ scale 3 = 48×18)
+  const S = 3;
+  const px = [
+    [0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0],
+    [0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0],
+    [0,0,1,1,0,1,1,0,0,1,1,0,1,1,0,0],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+    [0,0,1,1,0,0,0,0,0,0,0,0,1,1,0,0],
+  ];
+  ctx.fillStyle = '#f00';
+  for (let r = 0; r < px.length; r++) {
+    for (let c = 0; c < px[r].length; c++) {
+      if (px[r][c]) ctx.fillRect(ufo.x + c * S, ufo.y + r * S, S, S);
+    }
+  }
 }
 
 function checkPlayerBulletVsUFO() {
@@ -77,6 +91,7 @@ function checkPlayerBulletVsUFO() {
   score += bonus;
 
   // Consume bullet and despawn UFO
+  sfxUfoHit();
   playerBullet = null;
   despawnUFO();
 }
