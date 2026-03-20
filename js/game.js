@@ -12,6 +12,7 @@ function initGame() {
   resetPlayer();
   initAliens();
   alienBullets.length = 0; // clear any leftover bullets
+  initShields();            // SHLD-01: initialize 4 destructible shields
 }
 
 function update(dt) {
@@ -59,6 +60,7 @@ function render() {
 }
 
 function renderPlaying() {
+  renderShields(ctx);  // SHLD-01: shields render behind aliens
   renderAliens(ctx);
   renderPlayer(ctx);
   renderHUD(ctx);  // renders on top of game elements
