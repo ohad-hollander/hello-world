@@ -24,6 +24,7 @@ function updateBullets(dt) {
 }
 
 function checkCollisions() {
+  checkPlayerBulletVsUFO();          // UFO checked first — top of screen, fast reject for most frames
   checkPlayerBulletVsShields();    // shields checked first — bullet consumed stops alien check
   checkPlayerBulletVsAliens();
   checkAlienBulletsVsShields();    // alien bullets vs shields before player check
