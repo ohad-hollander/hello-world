@@ -168,21 +168,31 @@ function renderGameOver() {
 }
 
 function renderWaveClear() {
-  renderHUD(ctx);  // show score on wave clear
+  // Render final game frame behind overlay
+  renderPlaying();
 
+  // Semi-transparent overlay
   ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
   ctx.fillRect(0, 0, LOGICAL_WIDTH, LOGICAL_HEIGHT);
 
+  // WAVE CLEAR title
   ctx.fillStyle = '#0f0';
-  ctx.font = 'bold 48px monospace';
+  ctx.font = 'bold 64px monospace';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText('WAVE CLEAR!', LOGICAL_WIDTH / 2, LOGICAL_HEIGHT / 2 - 30);
+  ctx.fillText('WAVE CLEAR!', LOGICAL_WIDTH / 2, LOGICAL_HEIGHT / 2 - 60);
 
-  ctx.font = '24px monospace';
+  // Score
   ctx.fillStyle = '#fff';
-  ctx.fillText('Score: ' + String(score).padStart(4, '0'), LOGICAL_WIDTH / 2, LOGICAL_HEIGHT / 2 + 30);
-  ctx.font = '18px monospace';
+  ctx.font = '30px monospace';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('Score: ' + String(score).padStart(4, '0'), LOGICAL_WIDTH / 2, LOGICAL_HEIGHT / 2 + 10);
+
+  // Next wave announcement
   ctx.fillStyle = '#aaa';
-  ctx.fillText('(wave progression in Phase 4)', LOGICAL_WIDTH / 2, LOGICAL_HEIGHT / 2 + 70);
+  ctx.font = '22px monospace';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('Wave ' + (waveNumber + 1) + ' incoming...', LOGICAL_WIDTH / 2, LOGICAL_HEIGHT / 2 + 60);
 }
