@@ -24,7 +24,9 @@ function updateBullets(dt) {
 }
 
 function checkCollisions() {
+  checkPlayerBulletVsShields();    // shields checked first — bullet consumed stops alien check
   checkPlayerBulletVsAliens();
+  checkAlienBulletsVsShields();    // alien bullets vs shields before player check
   checkAlienBulletsVsPlayer();
 }
 
