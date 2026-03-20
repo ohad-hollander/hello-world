@@ -46,3 +46,11 @@ const ALIEN_BULLET_H        = 12;
 
 // Scoring
 const ROW_POINTS = [30, 20, 20, 10, 10]; // index = row (0=top, 4=bottom)
+
+// Shields
+const SHIELD_Y              = 600;             // y of shield top edge (logical px)
+const SHIELD_W              = 66;              // shield width in logical px (22 original × 3)
+const SHIELD_H              = 48;              // shield height in logical px (16 original × 3)
+const SHIELD_POSITIONS      = [96, 240, 384, 528]; // x left-edges of 4 shields
+const SHIELD_CRATER_RADIUS  = 4;              // px radius of bullet-impact erosion crater
+const SHIELD_OVERFLIGHT_H   = 6;              // px height of strip eroded per march step
