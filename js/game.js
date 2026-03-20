@@ -4,16 +4,20 @@
 let gameState = 'playing'; // 'playing' | 'game_over' | 'wave_clear'
 let score = 0;
 let lives = 3;
+let waveNumber = 1;         // current wave (increments on each wave clear)
+let waveClearTimer = 0;     // seconds elapsed in wave_clear state
 
 function initGame() {
   gameState = 'playing';
   score = 0;
   lives = 3;
+  waveNumber = 1;           // FLOW-03: reset wave counter
+  waveClearTimer = 0;       // FLOW-03: clear wave transition timer
   resetPlayer();
   initAliens();
   alienBullets.length = 0; // clear any leftover bullets
   playerBullet = null;      // ensure no stale bullet on restart
-  initShields();            // SHLD-01: initialize 4 destructible shields
+  initShields();            // SHLD-01: reset shields on full restart
   initUFO();                // UFO-01: reset UFO spawn timer
 }
 
