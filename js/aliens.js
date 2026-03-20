@@ -89,6 +89,10 @@ function doMarchStep() {
     for (const alien of aliens) {
       if (alien.alive) alien.animFrame = alien.animFrame === 0 ? 1 : 0;
     }
+    // Check overflight after stepping down
+    if (typeof checkAlienOverflightVsShields === 'function') {
+      checkAlienOverflightVsShields();
+    }
     return;
   }
 
@@ -117,6 +121,11 @@ function doMarchStep() {
       (march.dx > 0 && rightmost >= MARCH_RIGHT_BOUND)) {
     march.dx = -march.dx;
     march.pendingDown = true;
+  }
+
+  // Alien overflight shield erosion — runs each march step (SHLD-03)
+  if (typeof checkAlienOverflightVsShields === 'function') {
+    checkAlienOverflightVsShields();
   }
 }
 
