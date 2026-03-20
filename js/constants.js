@@ -54,3 +54,12 @@ const SHIELD_H              = 48;              // shield height in logical px (1
 const SHIELD_POSITIONS      = [96, 240, 384, 528]; // x left-edges of 4 shields
 const SHIELD_CRATER_RADIUS  = 4;              // px radius of bullet-impact erosion crater
 const SHIELD_OVERFLIGHT_H   = 6;              // px height of strip eroded per march step
+
+// UFO (Mystery Ship)
+const UFO_W            = 48;           // logical width in px
+const UFO_H            = 18;           // logical height in px
+const UFO_Y            = 30;           // y of UFO top edge (above alien formation at y=120)
+const UFO_SPEED        = 90;           // px/sec horizontal travel speed
+const UFO_MIN_INTERVAL = 15;           // minimum seconds between UFO appearances
+const UFO_MAX_INTERVAL = 25;           // maximum seconds between UFO appearances
+const UFO_POINTS       = [50, 100, 150, 300]; // possible bonus values on UFO kill
