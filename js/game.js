@@ -100,11 +100,9 @@ function render() {
   if (gameState === 'playing') {
     renderPlaying();
   } else if (gameState === 'game_over') {
-    renderPlaying(); // render final frame behind text
-    renderGameOver();
+    renderGameOver();  // renderGameOver() calls renderPlaying() internally
   } else if (gameState === 'wave_clear') {
-    renderPlaying();
-    renderWaveClear();
+    renderWaveClear(); // renderWaveClear() calls renderPlaying() internally
   }
 }
 
@@ -133,23 +131,40 @@ function renderPlaying() {
 }
 
 function renderGameOver() {
-  renderHUD(ctx);  // show final score in HUD
+  // Render frozen game state visible behind overlay
+  renderPlaying();
 
-  // Dim overlay
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+  // Dim overlay — darker than wave clear to signal finality
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.75)';
   ctx.fillRect(0, 0, LOGICAL_WIDTH, LOGICAL_HEIGHT);
 
-  ctx.fillStyle = '#fff';
-  ctx.font = 'bold 48px monospace';
+  // GAME OVER title
+  ctx.fillStyle = '#f00';
+  ctx.font = 'bold 72px monospace';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText('GAME OVER', LOGICAL_WIDTH / 2, LOGICAL_HEIGHT / 2 - 30);
+  ctx.fillText('GAME OVER', LOGICAL_WIDTH / 2, LOGICAL_HEIGHT / 2 - 80);
 
+  // Final score
+  ctx.fillStyle = '#fff';
+  ctx.font = '32px monospace';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('Score: ' + String(score).padStart(4, '0'), LOGICAL_WIDTH / 2, LOGICAL_HEIGHT / 2);
+
+  // Wave reached
   ctx.font = '24px monospace';
-  ctx.fillText('Final Score: ' + String(score).padStart(4, '0'), LOGICAL_WIDTH / 2, LOGICAL_HEIGHT / 2 + 30);
-  ctx.font = '18px monospace';
   ctx.fillStyle = '#aaa';
-  ctx.fillText('(full restart in Phase 4)', LOGICAL_WIDTH / 2, LOGICAL_HEIGHT / 2 + 70);
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('Wave ' + waveNumber + ' reached', LOGICAL_WIDTH / 2, LOGICAL_HEIGHT / 2 + 50);
+
+  // Restart prompt
+  ctx.font = '22px monospace';
+  ctx.fillStyle = '#fff';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('Press ENTER or R to restart', LOGICAL_WIDTH / 2, LOGICAL_HEIGHT / 2 + 100);
 }
 
 function renderWaveClear() {
