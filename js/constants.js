@@ -63,3 +63,7 @@ const UFO_SPEED        = 90;           // px/sec horizontal travel speed
 const UFO_MIN_INTERVAL = 15;           // minimum seconds between UFO appearances
 const UFO_MAX_INTERVAL = 25;           // maximum seconds between UFO appearances
 const UFO_POINTS       = [50, 100, 150, 300]; // possible bonus values on UFO kill
+
+// Wave progression
+const WAVE_CLEAR_DELAY  = 2.0;    // seconds to show "WAVE CLEAR!" before starting next wave
+const WAVE_SPEED_FACTOR = 0.95;   // march speed multiplier per wave (1.0 = base, 0.95 = 5% faster each wave)
